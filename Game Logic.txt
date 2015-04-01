@@ -1,0 +1,29 @@
+Introduction
+Tower defense is a game where the goal is to stop the enemies from reaching a specific point on the map by building a variety of different towers which shoot at them as they pass. 
+Enemies and towers usually have varied abilities, costs, and upgrade prices. 
+When an enemy is defeated, the player earns money or points, which are used to buy or upgrade towers, or upgrade the number of money or points that are earned,
+or even upgrade the rate at which they upgrade.
+
+Enemies
+1 wave of enemies at a time (How many enemies?).
+Number of enemies increases with each wave?
+Enemy health points(HP) (10HP for basic level?). -- How would this change over different waves?
+Enemy destroyed if HP = 0.
+Speed at which enemies move? -- Different types of enemies (Fast ones, bigger ones, more HP, ones which attack back?)
+
+Towers
+How many Tower variants? - Cannon Tower; Arrow Tower; Ice; etc
+How much damage (Basic tower 5-10 dmg?).
+Prices for Tower (10 of currency).
+How is currency accrued? (how does the program decide when/how much money the player gets)
+Basic range?
+How many can towers be placed? 
+Towers cannot be placed on the path!
+Upgrades to towers? -- 3 upgrades?
+Can towers be destroyed by enemies?
+
+Game
+How many lives for the player(s) (10?) 20
+Player loses a life if enemy crosses finish line on path?
+Player loses game if lives = 0.
+Starting currency for building towers (50 of currency).

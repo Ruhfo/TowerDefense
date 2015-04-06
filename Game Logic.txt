@@ -1,29 +1,52 @@
 Introduction
-Tower defense is a game where the goal is to stop the enemies from reaching a specific point on the map by building a variety of different towers which shoot at them as they pass. 
-Enemies and towers usually have varied abilities, costs, and upgrade prices. 
+Tower defense is a game where the goal is to stop the enemies from reaching a specific point on the map by building a variety of different towers which shoot at them as 
+they pass. Enemies and towers usually have varied abilities, costs, and upgrade prices. 
 When an enemy is defeated, the player earns money or points, which are used to buy or upgrade towers, or upgrade the number of money or points that are earned,
 or even upgrade the rate at which they upgrade.
 
+Game
+The player has 10 lives to start with, after that we can make more lives available for purchase.
+Player loses a life if enemy crosses finish line on path. The live count will diminish by 1 every time an enemey crosses the final tile.
+Player loses game if lives = 0.
+Starting currency for building towers (50 credits).
+Towers can not be placed on the path!
+Each tiles can have only one tower on it. To build something else on it you need to destroy the one already there. This gives you some of the money back and frees the tile.
+
 Enemies
-1 wave of enemies at a time (How many enemies?).
-Number of enemies increases with each wave?
-Enemy health points(HP) (10HP for basic level?). -- How would this change over different waves?
+1 wave of enemies at a time - About 3-4 should do to start things off. 
+Number of enemies increases with each wave. This will happen because of some random variable and needs to be tested to get the right difficulty.
+Enemy health points(HP) (10HP for basic level). Each enemies is unique and has different stats.
 Enemy destroyed if HP = 0.
-Speed at which enemies move? -- Different types of enemies (Fast ones, bigger ones, more HP, ones which attack back?)
+Speed at which enemies move -- Different types of enemies (Fast ones, bigger ones, more HP) 
+Each enemy that dies gives the player a random amount of money based on the enemy destroyed.
 
 Towers
-How many Tower variants? - Cannon Tower; Arrow Tower; Ice; etc
-How much damage (Basic tower 5-10 dmg?).
-Prices for Tower (10 of currency).
-How is currency accrued? (how does the program decide when/how much money the player gets)
-Basic range?
-How many can towers be placed? 
-Towers cannot be placed on the path!
-Upgrades to towers? -- 3 upgrades?
-Can towers be destroyed by enemies?
 
-Game
-How many lives for the player(s) (10?) 20
-Player loses a life if enemy crosses finish line on path?
-Player loses game if lives = 0.
-Starting currency for building towers (50 of currency).
+Arrow Tower - Grey ones.
+They are the cheapest ones to buy and the fastest of all towers. This however means that their individual damage is weak and the player needs multiple towers to take down 
+tougher enemies.
+Cost: 10
+Range: Medium
+DMG: 1 per shot
+Recharge time: x sec
+Special: No
+
+
+Cannon Tower - Red ones
+This is the most powerful tower type of them all(5DMG per cannon ball). With a long range it can obliterate enemies from away. However this power comes at a cost of a 
+long recharge time.
+Cost: 20
+Range: Long
+DMG: 5 per shot
+Recharge time: x sec
+Special: No
+
+
+Mud - Brown ones
+This tower is not meant for attack, but instead it fires slippery mud at its enemies, slowing them considerably. Especially effective against small and fast enemies 
+that can slip through in large groups.
+Cost: 15
+Range: Medium
+DMG: None
+Recharge time: x sec
+Special abilty: Mud 

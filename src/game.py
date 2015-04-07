@@ -6,12 +6,10 @@ import random
 #defining constants
 LOCATION = os.getcwd() #Working directory
 MAXFPS = 60 #Guess what
-LENGTH = int(1024/128) #Temporary way to calculate length
+LENGTH = 8 #Temporary way to calculate length
 
 IMG_W = 128 #We need 1/2 of it move tile right
 IMG_H = 128 #We need 1/4 of it to move tile down
-
-
 
 pygame.init()
 
@@ -24,50 +22,24 @@ def load_images():
         for img in range(40):
             sprites_landscape+=[pygame.image.load(
                                 os.path.join(img_path,"landscape_"+str(img)+".png"))
-                                ]
     else:
         pass #Something is wrong, but we don't know it yet
 
     return sprites_landscape
 
 def generate_map(width, height):
-    #Generating 2d array and filling it with items
+    #Creating 2d array and filling it with items
     #G stands for grass and R for road
-    r = random.Random()
-    game_map = [["G" for i in range(width)] for i in range(height)] 
+    game_map = [] 
+    game_map.append(["G", "G", "G", "R", "R", "G", "G", "G"])
+    game_map.append(["G", "G", "G", "G", "R", "G", "G", "G"])
+    game_map.append(["G", "G", "G", "R", "R", "G", "G", "G"])
+    game_map.append(["G", "G", "G", "R", "G", "G", "G", "G"])
+    game_map.append(["G", "G", "G", "R", "R", "R", "G", "G"])
+    game_map.append(["G", "G", "G", "G", "G", "R", "G", "G"])
+    game_map.append(["G", "G", "G", "G", "G", "R", "G", "G"])
+    game_map.append(["G", "G", "G", "G", "G", "R", "G", "G"])
     
-    #Generating points from start to finish 
-    points = [(r.randint(0, width-1), 0)] #start
-
-    pointnr = r.randint(3, 5)
-    for i in range(pointnr):
-        points+=[(r.randint(0, width-1), r.randint(0, height-1))]
-
-    points+=[(r.randint(0, width-1), height-1)] #Finish
-
-    for i in range(len(points)-1):
-        x1, y1 = points[i]
-        x2, y2 = points[i+1]
-        game_map[x1][y1] = "R"
-        game_map[x2][y2] = "R"
-        if r.randint(0, 1) == 1:
-            #go vertical first
-            for x in range(x2,x1):
-                game_map[x][y1] = "R"
-            for y in range(y2,y1):
-                game_map[x2][y] = "R"
-        else:
-            #go horizontal first
-            for y in range(y1,y2):
-                game_map[x2][y] = "R"
-            for x in range(x1,x2):
-                game_map[x][y2] = "R"
-
-    #Debug only printing grid
-    for y in range(height):
-        for x in range(width):
-            print(game_map[x][y], end="")
-        print("")
     return game_map
 
 def draw_grid(surf, sprites):

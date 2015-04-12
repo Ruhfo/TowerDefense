@@ -66,7 +66,7 @@ sprites_landscape = load_images()
 
 #Define color tuples R, G, B
 black = (0,0,0)
-#Load game data -> RAM
+#Load preferences or saved game into memory 
 
 #Generate Map 
 game_map = generate_map(LENGTH,LENGTH)

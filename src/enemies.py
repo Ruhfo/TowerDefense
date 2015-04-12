@@ -1,4 +1,5 @@
 import gameobject
+from pygame import sprite, image
 #added enemy template here
 
 class Enemy(gameobject.GameObject):

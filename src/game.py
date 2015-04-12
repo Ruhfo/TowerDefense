@@ -25,8 +25,9 @@ def load_images():
 
 def generate_map(width, height):
     #Creating 2d array and filling it with items
-    #G stands for grass and R for road
+    # G-grass and R-road S-start F-finish
     game_map = [] 
+
     game_map.append(["G", "G", "G", "S", "R", "G", "G", "G"])
     game_map.append(["G", "G", "G", "G", "R", "G", "G", "G"])
     game_map.append(["G", "G", "G", "R", "R", "G", "G", "G"])
@@ -48,7 +49,13 @@ def draw_grid(surf, sprites):
                 sprite=sprites[17]
             else:
                 sprite=sprites[13]
-            surf.blit(sprite, ((startx-x*64)+y*64,(starty+x*32)+y*32))
+            surf.blit(sprite, ((startx-x*IMG_W/2)+y*IMG_H/2,(starty+x*IMG_W/4)+y*IMG_H/4))
+
+def drawing(screen, sprites_land):
+    #Function for drawing litteraly everything
+    screen.fill(black)
+    draw_grid(screen, sprites_land)
+    pygame.display.flip()
 
 #Create window 
 size = width, height = 1024, 768
@@ -73,9 +80,7 @@ while True:
     #Game logic 
 
     #Drawing
-    screen.fill(black)
-    draw_grid(screen, sprites_landscape)
-    pygame.display.flip()
+    drawing(screen, sprites_landscape)
     #Get userinput
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 

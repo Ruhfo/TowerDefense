@@ -1,0 +1,37 @@
+This is description of technical framework for the game
+
+Map generation
+
+*Proceduraly generating maps is expensive
+*So we will use premade maps
+*Standard map size is 8x8
+*Vanity decorations will be added later
+*map contents are decided using array
+
+Symbols
+* G - grass
+* R - road
+* S - spawn
+* F - finish
+
+
+Drawing map
+
+*Drawing the map starts from right top corner
+Order of drawing
+
+right top square --> rightmost collum --> next collum --> finish
+
+*Drawing system should be reworked in the future
+
+Active object system
+
+* All moving or otherwise active objects have a parrent object
+* This parrent object should have some kind of animating function integrated
+
+Enemy AI
+
+* Enemies should be using map array to decide on path
+* Enemies are drawn using linear interpolation
+
+

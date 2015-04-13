@@ -23,10 +23,13 @@ def load_images():
             sprites_landscape+=[pygame.image.load(os.path.join(img_path,"landscape_"+str(img)+".png"))]
     return sprites_landscape
 
-def generate_map(width, height):
+def generate_map(width, height, sprites):
     #Creating 2d array and filling it with items
     # G-grass and R-road S-start F-finish
-    game_map = [] 
+    game_map = [] #Simple human readable array with necessary contents
+    grid = [[0 for i in range(LENGTH)] for i in range(LENGTH)] #More complex array
+    
+    #initialize grid
 
     game_map.append(["G", "G", "G", "S", "R", "G", "G", "G"])
     game_map.append(["G", "G", "G", "G", "R", "G", "G", "G"])
@@ -37,24 +40,40 @@ def generate_map(width, height):
     game_map.append(["G", "G", "G", "G", "G", "R", "G", "G"])
     game_map.append(["G", "G", "G", "G", "G", "F", "G", "G"])
     
-    return game_map
-
-def draw_grid(surf, sprites):
-    #Function for drawing the landscape
-    startx = (LENGTH/2*IMG_W)-IMG_W/2 
+    #Defining map drawing starting positions
+    startx = (0.5*LENGTH*IMG_W)-IMG_W*0.5
     starty = IMG_H
+
     for x in range(LENGTH):
         for y in range(LENGTH):
-            if (game_map[y][x] == "R" or game_map[y][x] == "S" or game_map[y][x] == "F" ):
-                sprite=sprites[17]
-            else:
-                sprite=sprites[13]
-            surf.blit(sprite, ((startx-x*IMG_W/2)+y*IMG_H/2,(starty+x*IMG_W/4)+y*IMG_H/4))
+            unit = []
 
-def drawing(screen, sprites_land):
+            posx = (startx-x*IMG_W*0.5)+y*IMG_H*0.5
+            posy = (starty+x*IMG_W/4)+y*IMG_H/4
+            rect = pygame.Rect(posx, posy, IMG_W, IMG_H )
+            unit.append(rect) #Cordinate area rect
+
+            if (game_map[x][y] == "R" or game_map[x][y] == "S" or game_map[x][y] == "F" ):
+                unit.append(sprites[17])
+            else:
+                unit.append(sprites[13])
+            grid[x][y] = unit
+
+    return grid 
+
+def draw_grid(screen, grid):
+    #Function for drawing the landscape
+    surf = screen
+    for x in range(LENGTH):
+        for y in range(LENGTH):
+            unit = grid[x][y]
+            pos = unit[0]
+            surf.blit(unit[1], pos)
+
+def drawing(screen, grid):
     #Function for drawing litteraly everything
     screen.fill(black)
-    draw_grid(screen, sprites_land)
+    draw_grid(screen, grid)
     pygame.display.flip()
 
 #Create window 
@@ -69,9 +88,10 @@ black = (0,0,0)
 #Load preferences or saved game into memory 
 
 #Generate Map 
-game_map = generate_map(LENGTH,LENGTH)
+game_map = generate_map(LENGTH,LENGTH, sprites_landscape)
 
 #Start counting for waves --> counter on new thread
+
 clock = pygame.time.Clock() #clock for limiting framerate
 
 while True:
@@ -80,7 +100,7 @@ while True:
     #Game logic 
 
     #Drawing
-    drawing(screen, sprites_landscape)
+    drawing(screen, game_map)
     #Get userinput
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 

@@ -1,8 +1,8 @@
-class ArrowTower:
-    def __init__():
+from gameobject import GameObject
 
-class CannonTower:
+class ArrowTower (GameObject):
     def __init__():
-
-class MudTower:
+class CannonTower(GameObject):
+    def __init__():
+class MudTower(GameObject):
     def __init__():

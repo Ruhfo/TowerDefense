@@ -8,14 +8,18 @@ class GameObject(sprite.Sprite):
         #Initializing base variables
         super(self)
         
-        self.image = images[0] #image for parent object
+
+        self.imageIndex = 0 # Current image
+        self.image = images[self.imageIndex] #image for parent object
+        self.imageCount = len(images) #Total number of images
         self.images = images #Image list for animations
         
-        self.rect = self.image.get_rect() #get rekt
+        self.rect = self.image.get_rect() #get rekt (for collision)
         pass
     def draw(self):
         #draw calls go here
+
         pass
-    def step(self):
+    def update(self):
         #Just like step in game maker
         pass

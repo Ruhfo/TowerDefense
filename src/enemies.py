@@ -7,7 +7,7 @@ class Enemy(gameobject.GameObject):
         #Initializing base variables
         super() #We probably should initialize parrent object
         pass
-    def step(self):
+    def update(self):
         #Overwrite parrent step
         pass
     def draw(self):

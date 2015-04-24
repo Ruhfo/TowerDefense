@@ -116,6 +116,13 @@ while True:
             sys.exit()
     #Get mouse thingys
     if pygame.mouse.get_pressed() == (1, 0, 0):
-        x, y = pygame.mouse.get_pos()
-        print("X: "+str(x)+"Y: "+str(y))
+        xx, yy = pygame.mouse.get_pos()
+        for x in range (LENGTH):
+            for y in range(LENGTH):
+                rect = game_map[x][y]
+                if rect[0].collidepoint(xx,yy):
+                    #Lets create new tower
+                    sprs = [sprites_tower[0]]
+                    tow = BaseTower(sprs, 0, rect[0])
+                    gameobjects.append(tow)
 quit()

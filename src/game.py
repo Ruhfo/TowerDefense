@@ -7,21 +7,22 @@ from towers import BaseTower
 #defining constants
 LOCATION = os.getcwd() #Working directory
 MAXFPS = 60 #Guess what
-LENGTH = 8 #Temporary way to calculate length
 
-IMG_W = 128 #We need 1/2 of it move tile right
-IMG_H = 128 #We need 1/4 of it to move tile down
+IMG_W = 64
+IMG_H = 64 
+
+LENGTH = 8 
 
 pygame.init()
 
-def load_images(path, name):
+def load_images(path, name, length):
     #Function for loading all images into a dictionary
     img_path = os.path.join(LOCATION, path)
     sprites = []
     if os.path.exists(img_path):
-        for img in range(40):
+        for img in range(length):
             sprites+=[pygame.image.load(os.path.join(img_path,
-                                name+str(img)+".png"))]
+                    name+str(img)+".png"))]
     return sprites
 
 def generate_map(width, height, sprites):
@@ -41,22 +42,22 @@ def generate_map(width, height, sprites):
     game_map.append(["G", "G", "G", "G", "G", "F", "G", "G"])
     
     #Defining map drawing starting positions
-    startx = (0.5*LENGTH*IMG_W)-IMG_W*0.5
-    starty = IMG_H
+    startx = 0 
+    starty = 0 
 
     for x in range(LENGTH):
         for y in range(LENGTH):
             unit = [] #unit[0] = position rect, unit[1] = image 
 
-            posx = (startx-x*IMG_W*0.5)+y*IMG_H*0.5
-            posy = (starty+x*IMG_W/4)+y*IMG_H/4
+            posx = startx+x*IMG_W
+            posy = starty+y*IMG_H
             rect = pygame.Rect(posx, posy, IMG_W, IMG_H )
             unit.append(rect) #Cordinate area rect
 
             if (game_map[x][y] == "R" or game_map[x][y] == "S" or game_map[x][y] == "F" ):
-                unit.append(sprites[17])
+                unit.append(sprites[1])
             else:
-                unit.append(sprites[13])
+                unit.append(sprites[0])
             grid[x][y] = unit
 
     return grid 
@@ -71,12 +72,12 @@ def draw_grid(screen, grid):
             surf.blit(unit[1], pos)
 
 #Create window 
-size = width, height = 1024, 768
+size = width, height = 512, 512
 screen = pygame.display.set_mode(size)
 
 #Load images -> RAM
-sprites_landscape = load_images("img/PNG/Landscape", "landscape_")
-sprites_tower = load_images("img/PNG/Towers", "tower_")
+sprites_landscape = load_images("img/PNG", "landscape_", 2)
+sprites_tower = load_images("img/PNG", "tower_", 1)
 #Define color tuples R, G, B
 black = (0,0,0)
 #Load preferences or saved game into memory 
@@ -89,11 +90,6 @@ game_map = generate_map(LENGTH,LENGTH, sprites_landscape)
 clock = pygame.time.Clock() #clock for limiting framerate
 
 gameobjects = [] #List containing all the gameobjects
-
-###Testing only ######
-imgs = [ sprites_tower[1]]
-pos = game_map[1][1][0]
-gameobjects.append(BaseTower(imgs, 0, pos))
 
 while True:
     #Game loop
@@ -118,5 +114,8 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-
+    #Get mouse thingys
+    if pygame.mouse.get_pressed() == (1, 0, 0):
+        x, y = pygame.mouse.get_pos()
+        print("X: "+str(x)+"Y: "+str(y))
 quit()
